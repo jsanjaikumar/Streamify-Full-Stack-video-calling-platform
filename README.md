@@ -1,7 +1,7 @@
 # 🎥 Streamify - Video Calling Platform
 
 <div align="center">
-  <img src="./frontend/public/screenshot-for-readme.png" alt="Streamify Screenshot" width="800px" />
+  
   
   <p>A modern, full-stack video calling platform built with React, Node.js, and Stream.io</p>
   
