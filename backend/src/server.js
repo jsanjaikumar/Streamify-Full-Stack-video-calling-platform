@@ -15,10 +15,27 @@ const PORT = process.env.PORT || 5001;
 
 const __dirname = path.resolve();
 
+app.use((req, res, next) => {
+  console.log("Request Origin:", req.headers.origin);
+  next();
+});
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_BASE_URL, // e.g., https://your-frontend.vercel.app
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_BASE_URL,
-    credentials: true, // allow frontend to send cookies
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log("Blocked by CORS:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
 
